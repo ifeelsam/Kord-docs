@@ -1,5 +1,3 @@
-## 🔄 How It Works {#how-it-works}
-
 ### Phase 1: Artist Proposal (5 mins) {#phase-1}
 ```
 1. Connect Phantom → "Fund My Album"
