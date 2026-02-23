@@ -1,119 +1,59 @@
-### Phase 1: Artist Proposal (5 mins) {#phase-1}
-```
-1. Connect Phantom → "Fund My Album"
-2. Enter: "New Album: $50k needed" + budget breakdown
-3. Minimum perks auto-selected: 
-   ✅ 1% AUDIO royalties 
-   ✅ Early Audius drop 
-   ✅ Concert discount code
-4. Launch → Live for fan investments
-```
+---
+description: Phase-by-phase breakdown
+---
 
-### Phase 2: Fan Crowdfunding {#phase-2}
-```
-Fans browse Audius → "Invest $100" → Get tokens instantly
-90% funds → Artist milestones, 10% → LP seed
-```
+# How it works
 
-### Phase 3: Milestone Delivery {#phase-3}
+**Phase 1: Tokenized Proposal (Artist-Only, 5 Minutes)**
+
 ```
-Artist uploads proof → Community verifies → 
-20% funds released → Artist hits next milestone
+1. Artist connects Phantom wallet on Kord/Audius
+2. Fills proposal: "Echoes Album - $50K needed - 60 days"
+3. Uploads budget breakdown (validated automatically)
+4. Selects minimum perks: 1% AUDIO royalties, early drop, merch discount
+5. Clicks "Launch" → KordFactory deploys:
+   → SPL Token: 1M total supply (fixed)
+   → MilestoneVault: Escrows 90% funds
+   → Raydium LP: 10% seed liquidity
 ```
 
-### Phase 4: Royalties = Token Value {#phase-4}
+**Phase 2: Fan Investment (Permissionless Crowdfunding)**
+
 ```
-Streams generate AUDIO → Anchor deposits LP → 
-Token price grows with real album success
-```
-
-***
-
-## 🎛️ Smart Contracts {#contracts}
-
-**Solana Anchor Program** `Kord_factory`:
-
-```rust
-pub fn create_project(
-    name: String, 
-    goal: u64, 
-    milestones: Vec<Milestone>
-) → ProjectSPL + Vault + LP Pair
+Fans discover on Audius/Kord Explore:
+→ "Echoes Album - 73% funded - $36K raised"
+→ "Invest $100" → Swap SOL/USDC → Receive 1,000 ECHO tokens instantly
+→ Real-time progress bar + token price chart
 ```
 
-**Key flows**:
-```rust
-contribute(amount: u64)     // Fans → Tokens
-claim_milestone(stage: u8)  // Artist → Funds  
-add_audio_royalties(amount) // Anchor → LP growth
+**Fixed tokenomics eliminates scams**:
+
+```
+50% Public Sale → Immediate fan access
+20% Initial LP → Trading starts day 1
+20% Anchor Royalties → AUDIO stream capture
+10% Artist Vesting → 12mo linear (skin in game)
 ```
 
-***
+**Phase 3: Milestone Accountability (Earned Funding)**
 
-## 📱 User Flows {#flows}
-
-### Artist Journey {#artist}
 ```
-"Need $50k for album" → Create → Fans fund → 
-Deliver milestones → Release on Audius → 
-**Passive royalties grow LP value forever**
+Artist uploads IPFS proof → Community verifies:
+✅ Milestone 1: "5 demos complete" → 20% ($10K) released
+✅ Milestone 2: "Mixing finished" → 30% ($15K) released
+✅ Final: "Album live on Audius" → 50% ($25K) released
 ```
 
-### Fan Journey {#fan}
-```
-Discover album → Invest $50 → Track progress → 
-**Get AUDIO royalties + concert perks + trade appreciated tokens**
-```
+**No rugs possible**: Funds locked until delivery.
 
-***
+**Phase 4: Automatic Value Creation (The Magic)**
 
-## 💰 Platform Revenue {#revenue}
 ```
-✅ 5% fee on successful raises 
-✅ 0.3% Raydium LP trading fees
-✅ Premium artist analytics
+Month 1 post-release: Album gets 500K Audius streams
+→ Generates 2,500 AUDIO tokens ($7.5K @ $3/AUDIO)
+→ Anchor Org collects → Auto-deposits Raydium LP
+→ ECHO token price: $0.10 → $0.23 (130% appreciation)
+→ Fans holding 1K tokens: $100 → $230 profit
 ```
 
-***
-
-## 🔒 Security {#security}
-```
-✅ 24h timelocks on LP deposits
-✅ Anchor multisig (3/5 keys)
-✅ SPL Token-2022 transfer hooks
-✅ Sec3 audit ready
-```
-
-***
-
-## 🛠️ Tech Stack {#stack}
-```
-Frontend: Next.js + Solana Wallet Adapter
-Contracts: Anchor Rust + SPL Token-2022
-DEX: Raydium AMM + Jupiter swaps
-Data: Helius RPC + Audius API
-Storage: IPFS + Arweave permanence
-```
-
-***
-
-## 📈 Market Opportunity {#market}
-```
-TAM: $14.3B indie music market
-SAM: $232M blockchain-ready artists
-Kord: **First with real AUDIO royalties → LP**
-```
-
-***
-
-## 🚀 Launch Plan {#next}
-```
-[ ] Devnet deployment (1 week)
-[ ] Audius API integration spec
-[ ] 10 test projects
-[ ] Artist onboarding (100 targets)
-```
-
-***
-
-**Kord**: **"Artists need funds. Fans want ownership. We built the bridge."** 🎵⚡
+**Month 12**: Album hits 10M streams → Consistent AUDIO flow → Stable LP growth → Token becomes blue-chip music asset.
