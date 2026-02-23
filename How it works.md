@@ -17,7 +17,7 @@ description: Phase-by-phase breakdown
    → Raydium LP: 10% seed liquidity
 ```
 
-### 🎵 **Phase 2: Fan Investment (Permissionless Crowdfunding)** <a href="#components" id="components"></a>
+**Phase 2: Fan Investment (Permissionless Crowdfunding)**
 
 ```
 Fans discover on Audius/Kord Explore:

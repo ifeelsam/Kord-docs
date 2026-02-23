@@ -8,6 +8,8 @@ Kord: $50K patient capital → Keep 100% future royalties
 + Passive LP growth from their own streams
 ```
 
+***
+
 **2. Fans Get Real Ownership** (not NFTs):
 
 ```
@@ -16,7 +18,7 @@ Kord: "Own this album's revenue stream" →
 AUDIO royalties → LP value → Tradeable asset
 ```
 
-### **3. Tokenomics Impossible to Ruin**:
+**3. Tokenomics Impossible to Ruin**:
 
 ```
 Fixed 1M supply → No inflation
