@@ -8,8 +8,6 @@ Kord: $50K patient capital → Keep 100% future royalties
 + Passive LP growth from their own streams
 ```
 
-***
-
 **2. Fans Get Real Ownership** (not NFTs):
 
 ```
@@ -34,6 +32,8 @@ AUDIO token rewards = perfect royalty proxy
 Streaming data = verifiable success metric
 ```
 
+***
+
 #### The Flywheel Effect <a href="#flywheel" id="flywheel"></a>
 
 ```
@@ -43,6 +43,8 @@ Streaming data = verifiable success metric
 4. Platform fees → Better UX/marketing
 5. → Repeat
 ```
+
+***
 
 #### Economic Reality Check <a href="#economics" id="economics"></a>
 
