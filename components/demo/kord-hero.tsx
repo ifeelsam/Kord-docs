@@ -11,7 +11,7 @@ export function KordHero() {
         <span className="inline-block w-6 h-px bg-muted-foreground" />
       </div>
 
-      <h1 className="text-5xl md:text-7xl lg:text-8xl tracking-tight text-balance transition-all duration-300 font-[family-name:var(--font-geist-pixel-square)]">
+      <h1 className="text-5xl md:text-7xl lg:text-8xl tracking-tight text-balance transition-all duration-300 font-[family-name:var(--font-geist-pixel-line)]">
         Fund the Music
         <br />
         <span className="text-accent">You Love</span>
