@@ -1,4 +1,6 @@
-"use client"
+'use client'
+
+import Link from 'next/link'
 
 export function KordFooter() {
   return (
@@ -22,14 +24,14 @@ export function KordFooter() {
             </h4>
             <ul className="space-y-2 text-xs font-mono text-muted-foreground">
               <li>
-                <a href="#" className="hover:text-accent transition-colors">
+                <Link href="/explore" className="hover:text-accent transition-colors">
                   Explore Projects
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-accent transition-colors">
+                <Link href="/create" className="hover:text-accent transition-colors">
                   Create Project
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="hover:text-accent transition-colors">
