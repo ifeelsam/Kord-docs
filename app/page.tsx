@@ -28,18 +28,6 @@ export default function Page() {
         <hr className="border-border" />
       </div>
 
-      <KordFeaturedArtists />
-
-      <div className="max-w-5xl mx-auto px-4">
-        <hr className="border-border" />
-      </div>
-
-      <KordMetrics />
-
-      <div className="max-w-5xl mx-auto px-4">
-        <hr className="border-border" />
-      </div>
-
       <KordFAQ />
 
       <div className="max-w-5xl mx-auto px-4">
