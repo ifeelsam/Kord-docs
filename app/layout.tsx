@@ -16,7 +16,6 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: 'Kord — Fund the Music You Love',
   description: 'Fund the music you love and own the albums you support. Invest in artists, get AUDIO royalties, and early access to new releases.',
-  generator: 'v0.app',
   icons: {
     icon: [
       {
