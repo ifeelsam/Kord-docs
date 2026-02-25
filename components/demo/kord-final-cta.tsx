@@ -1,6 +1,9 @@
 "use client"
 
+import { useRouter } from "next/navigation";
+
 export function KordFinalCTA() {
+  const router = useRouter();
   return (
     <section className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
@@ -35,7 +38,11 @@ export function KordFinalCTA() {
               </p>
             </div>
 
-            <button className="w-full px-6 py-3 bg-primary text-primary-foreground font-mono text-sm rounded-lg border border-primary hover:opacity-90 transition-opacity">
+            <button className="w-full px-6 py-3 bg-primary text-primary-foreground font-mono text-sm rounded-lg border border-primary hover:opacity-90 transition-opacity"
+            onClick={() => {
+              router.push('/explore')
+            }}
+            >
               Browse Projects →
             </button>
           </div>
@@ -61,7 +68,11 @@ export function KordFinalCTA() {
               </p>
             </div>
 
-            <button className="w-full px-6 py-3 bg-secondary text-secondary-foreground font-mono text-sm rounded-lg border border-border hover:border-accent transition-colors">
+            <button className="w-full px-6 py-3 bg-secondary text-secondary-foreground font-mono text-sm rounded-lg border border-border hover:border-accent transition-colors"
+              onClick={() => {
+                router.push('/create')
+              }}
+            >
               Create Project →
             </button>
           </div>
