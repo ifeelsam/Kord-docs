@@ -143,37 +143,59 @@ const MOCK_PROJECTS = [
 ]
 
 export function ProjectGrid({ filters }: ProjectGridProps) {
-  const [projects, setProjects] = useState(MOCK_PROJECTS)
+  const [projects, setProjects] = useState<any[]>([])
   const [displayedCount, setDisplayedCount] = useState(6)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const observerTarget = useRef<HTMLDivElement>(null)
 
-  // Filter projects based on current filters
-  const filteredProjects = useCallback(() => {
-    let filtered = [...MOCK_PROJECTS]
-
-    if (filters.genre !== 'all') {
-      filtered = filtered.filter((p) => p.genre.toLowerCase() === filters.genre.toLowerCase())
-    }
-
-    if (filters.search) {
-      const query = filters.search.toLowerCase()
-      filtered = filtered.filter(
-        (p) =>
-          p.title.toLowerCase().includes(query) ||
-          p.artist.toLowerCase().includes(query) ||
-          p.artistHandle.toLowerCase().includes(query)
-      )
-    }
-
-    return filtered
-  }, [filters])
-
   useEffect(() => {
-    const filtered = filteredProjects()
-    setProjects(filtered)
+    const fetchProjects = async () => {
+      setIsLoading(true)
+      try {
+        const res = await fetch('/api/projects')
+        const data = await res.json()
+
+        let formattedData = data.map((p: any) => ({
+          id: p.id,
+          title: p.title,
+          artist: p.artist?.displayName || p.artist?.handle || 'Unknown Artist',
+          artistHandle: `@${p.artist?.handle}`,
+          genre: p.genre || 'Various',
+          image: p.imageUrl || 'ipfs://QmExample', // Default if no image
+          fundingCurrent: Number(p.fundingCurrent),
+          fundingGoal: Number(p.fundingGoal),
+          tokenPrice: Number(p.tokenPrice),
+          tokenChange: 0, // Mock for now since we don't have historical price
+          daysLeft: p.endDate ? Math.ceil((new Date(p.endDate).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)) : 0,
+          perks: [] // Mock perks for now
+        }))
+
+        // Filter projects based on current filters
+        if (filters.genre !== 'all') {
+          formattedData = formattedData.filter((p: any) => p.genre.toLowerCase() === filters.genre.toLowerCase())
+        }
+
+        if (filters.search) {
+          const query = filters.search.toLowerCase()
+          formattedData = formattedData.filter(
+            (p: any) =>
+              p.title.toLowerCase().includes(query) ||
+              p.artist.toLowerCase().includes(query) ||
+              p.artistHandle.toLowerCase().includes(query)
+          )
+        }
+
+        setProjects(formattedData)
+      } catch (err) {
+        console.error('Failed to fetch projects', err)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    fetchProjects()
     setDisplayedCount(6)
-  }, [filters, filteredProjects])
+  }, [filters])
 
   // Infinite scroll implementation
   useEffect(() => {

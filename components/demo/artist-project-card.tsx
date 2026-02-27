@@ -2,6 +2,8 @@
 
 import { Card } from '@/components/ui/card'
 import { TrendingUp } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
 
 interface ArtistProjectCardProps {
   project: {
@@ -92,9 +94,11 @@ export function ArtistProjectCard({ project }: ArtistProjectCardProps) {
 
         {/* Actions */}
         <div className="flex gap-2">
-          <button className="flex-1 px-3 py-2 text-xs font-mono bg-muted text-foreground rounded-lg border border-border hover:border-muted-foreground transition-all">
-            View Analytics
-          </button>
+          <Link href={`/dashboard/project/${project.id}/analytics`} className="flex-1 w-full" onClick={(e) => e.stopPropagation()}>
+            <button className="w-full px-3 py-2 text-xs font-mono bg-muted text-foreground rounded-lg border border-border hover:border-muted-foreground transition-all">
+              View Analytics
+            </button>
+          </Link>
           <button className="flex-1 px-3 py-2 text-xs font-mono text-muted-foreground rounded-lg border border-border hover:border-muted-foreground transition-all">
             Manage
           </button>

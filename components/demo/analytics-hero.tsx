@@ -33,12 +33,20 @@ export function AnalyticsHero({ projectId }: AnalyticsHeroProps) {
   return (
     <section className="border-b border-border">
       <div className="max-w-6xl mx-auto px-4 py-8">
-        {/* Title Section */}
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-[family-name:var(--font-geist-pixel-square)] mb-2">
-            Echoes Analytics
-          </h1>
-          <p className="text-muted-foreground font-mono text-sm">Electronic Album by @janedoe</p>
+        <div className="relative w-full h-48 md:h-64 lg:h-80 mb-8 rounded-xl overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200&h=600&fit=crop"
+            alt="Echoes Album Art"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
+
+          <div className="absolute bottom-6 left-6 right-6">
+            <h1 className="text-4xl md:text-5xl font-[family-name:var(--font-geist-pixel-square)] mb-2 text-white">
+              Echoes Analytics
+            </h1>
+            <p className="text-white/80 font-mono text-sm shadow-sm">Electronic Album by @janedoe</p>
+          </div>
         </div>
 
         {/* Key Metrics Grid */}
@@ -107,8 +115,8 @@ export function AnalyticsHero({ projectId }: AnalyticsHeroProps) {
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis dataKey="date" tick={{ fontSize: 12, fill: '#ffffff' }} stroke="#ffffff" />
                 <YAxis tick={{ fontSize: 12, fill: '#ffffff' }} stroke="#ffffff" />
-                <Tooltip 
-                  contentStyle={{ 
+                <Tooltip
+                  contentStyle={{
                     backgroundColor: 'hsl(var(--card))',
                     border: '1px solid hsl(var(--border))',
                   }}
@@ -126,8 +134,8 @@ export function AnalyticsHero({ projectId }: AnalyticsHeroProps) {
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis dataKey="hour" tick={{ fontSize: 12, fill: '#ffffff' }} stroke="#ffffff" />
                 <YAxis tick={{ fontSize: 12, fill: '#ffffff' }} stroke="#ffffff" />
-                <Tooltip 
-                  contentStyle={{ 
+                <Tooltip
+                  contentStyle={{
                     backgroundColor: 'hsl(var(--card))',
                     border: '1px solid hsl(var(--border))',
                   }}

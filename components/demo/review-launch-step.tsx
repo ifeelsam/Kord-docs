@@ -15,7 +15,7 @@ interface ReviewLaunchStepProps {
 
 export function ReviewLaunchStep({ formData, onLaunch, onPrevious }: ReviewLaunchStepProps) {
   const { createProject, isLoading: isLaunching, error: launchError } = useCreateProject()
-  const { connected } = useKordProgram()
+  const { connected, provider } = useKordProgram()
   const [txHash, setTxHash] = useState<string | null>(null)
 
   const total = Object.values(formData.budgetBreakdown).reduce((sum: number, val: any) => sum + Number(val), 0)
@@ -50,14 +50,45 @@ export function ReviewLaunchStep({ formData, onLaunch, onPrevious }: ReviewLaunc
 
     if (result) {
       setTxHash(result.txSignature)
+
+      try {
+        const tokenSymbol = `KORD-${formData.projectTitle?.split(' ')[0]?.toUpperCase() || 'PROJECT'}`
+
+        await fetch('/api/projects', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: formData.projectTitle,
+            artistHandle: formData.artistHandle,
+            walletAddress: provider?.wallet?.publicKey?.toString() || 'unknown',
+            genre: formData.genre,
+            description: formData.description,
+            fundingGoal: formData.fundingGoal,
+            tokenSymbol,
+            tokenPrice: tokenomicsData.initialPrice,
+            campaignEnd: formData.campaignEnd,
+          })
+        })
+      } catch (err) {
+        console.error('Failed to save project to DB:', err)
+      }
+
       onLaunch()
     }
   }
 
-  const formatCurrency = (num: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num)
-  const formatDate = (date: Date) => new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(date)
-  const daysRemaining = Math.ceil((formData.campaignEnd - new Date()) / (1000 * 60 * 60 * 24))
+  const formatCurrency = (num: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num || 0)
 
+  const formatDate = (date: any) => {
+    if (!date) return 'TBD'
+    const d = new Date(date)
+    return isNaN(d.getTime()) ? 'Invalid Date' : new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(d)
+  }
+
+  const campaignEndDate = formData.campaignEnd ? new Date(formData.campaignEnd) : new Date()
+  const daysRemaining = isNaN(campaignEndDate.getTime())
+    ? 0
+    : Math.max(0, Math.ceil((campaignEndDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)))
   return (
     <div className="space-y-8 py-8">
       {/* Project Preview */}

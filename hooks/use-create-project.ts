@@ -88,6 +88,7 @@ export function useCreateProject() {
                 .initializeTokenAllocations()
                 .accountsPartial({
                     artist,
+                    project: projectPda,
                     tokenMint: tokenMint.publicKey,
                     publicSaleAccount: publicSaleAta,
                     lpTokenAccount: lpTokenKeypair.publicKey,
