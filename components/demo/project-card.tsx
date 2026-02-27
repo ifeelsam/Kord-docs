@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { TrendingUp } from 'lucide-react'
 import { ProjectDetailModal } from './project-detail-modal'
 
@@ -38,10 +39,9 @@ export function ProjectCard({
 
   return (
     <>
-      <div
-        onClick={() => setIsModalOpen(true)}
-        className="group cursor-pointer rounded-lg border border-border bg-card hover:border-muted-foreground transition-all duration-300 overflow-hidden hover:shadow-lg hover:shadow-accent/20"
-      >
+      <Link href={`/project/${id}`}>
+        <div className="group cursor-pointer rounded-lg border border-border bg-card hover:border-muted-foreground transition-all duration-300 overflow-hidden hover:shadow-lg hover:shadow-accent/20">
+
         {/* Album Art */}
         <div className="relative h-48 overflow-hidden bg-secondary">
           <div className="w-full h-full bg-gradient-to-br from-accent/30 to-accent/10 flex items-center justify-center">
@@ -108,25 +108,8 @@ export function ProjectCard({
             Invest Now
           </button>
         </div>
-      </div>
-
-      <ProjectDetailModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        project={{
-          id,
-          title,
-          artist,
-          artistHandle,
-          genre,
-          fundingCurrent,
-          fundingGoal,
-          tokenPrice,
-          tokenChange,
-          daysLeft,
-          perks,
-        }}
-      />
+        </div>
+      </Link>
     </>
   )
 }

@@ -1,8 +1,6 @@
 import { KordHero } from "@/components/demo/kord-hero"
 import { KordLiveProjects } from "@/components/demo/kord-live-projects"
 import { KordHowItWorks } from "@/components/demo/kord-how-it-works"
-import { KordFeaturedArtists } from "@/components/demo/kord-featured-artists"
-import { KordMetrics } from "@/components/demo/kord-metrics"
 import { KordFAQ } from "@/components/demo/kord-faq"
 import { KordFinalCTA } from "@/components/demo/kord-final-cta"
 import { KordFooter } from "@/components/demo/kord-footer"

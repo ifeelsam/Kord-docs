@@ -34,6 +34,11 @@ export function KordFooter() {
                 </Link>
               </li>
               <li>
+                <Link href="/dashboard" className="hover:text-accent transition-colors">
+                  Dashboard
+                </Link>
+              </li>
+              <li>
                 <a href="#" className="hover:text-accent transition-colors">
                   Developer Docs
                 </a>
