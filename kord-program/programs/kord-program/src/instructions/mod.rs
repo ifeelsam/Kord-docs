@@ -1,3 +1,25 @@
-pub mod initialize;
+pub mod create_project;
+pub mod initialize_token_allocations;
+pub mod contribute;
+pub mod emergency_refund;
+pub mod create_milestone_market;
+pub mod trade_outcome;
+pub mod submit_milestone_proof;
+pub mod resolve_milestone;
+pub mod claim_yes_shares;
+pub mod claim_no_shares;
+pub mod deposit_audio_royalties;
+pub mod claim_artist_vesting;
 
-pub use initialize::*;
+pub use create_project::*;
+pub use initialize_token_allocations::*;
+pub use contribute::*;
+pub use emergency_refund::*;
+pub use create_milestone_market::*;
+pub use trade_outcome::*;
+pub use submit_milestone_proof::*;
+pub use resolve_milestone::*;
+pub use claim_yes_shares::*;
+pub use claim_no_shares::*;
+pub use deposit_audio_royalties::*;
+pub use claim_artist_vesting::*;

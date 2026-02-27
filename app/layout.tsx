@@ -9,6 +9,8 @@ import {
 } from 'geist/font/pixel'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+import '@solana/wallet-adapter-react-ui/styles.css'
+import { SolanaWalletProvider } from '@/components/solana/solana-wallet-provider'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
@@ -46,7 +48,7 @@ export default function RootLayout({
       className={`${GeistPixelLine.variable} ${GeistPixelTriangle.variable} ${GeistPixelCircle.variable} ${GeistPixelGrid.variable} ${GeistPixelSquare.variable}`}
     >
       <body className="font-sans antialiased">
-        {children}
+        <SolanaWalletProvider>{children}</SolanaWalletProvider>
         <Analytics />
       </body>
     </html>

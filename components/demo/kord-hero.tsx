@@ -1,6 +1,7 @@
 "use client"
 
 import Link from 'next/link'
+import { ConnectWalletButton } from '@/components/solana/connect-wallet-button'
 
 export function KordHero() {
   return (
@@ -30,9 +31,7 @@ export function KordHero() {
       </div>
 
       <div className="flex flex-wrap justify-center gap-4 mt-8">
-        <button className="px-6 py-3 text-sm font-mono bg-primary text-primary-foreground rounded-lg border border-primary hover:opacity-90 transition-opacity">
-          Connect Wallet
-        </button>
+        <ConnectWalletButton />
         <Link href="/explore">
           <button className="px-6 py-3 text-sm font-mono bg-secondary text-secondary-foreground rounded-lg border border-border hover:border-muted-foreground transition-all">
             Explore Projects
