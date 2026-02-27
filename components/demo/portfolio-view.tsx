@@ -2,6 +2,8 @@
 
 import { Card } from '@/components/ui/card'
 import { TrendingUp, TrendingDown } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
 
 export function PortfolioView() {
   const portfolioSummary = [
@@ -167,9 +169,11 @@ export function PortfolioView() {
                   </div>
 
                   <div className="flex gap-2">
-                    <button className="px-3 py-2 text-xs font-mono bg-muted text-foreground rounded-lg border border-border hover:border-muted-foreground transition-all">
-                      Trade
-                    </button>
+                    <Link href={`/project/${holding.id}/trade`} onClick={(e: React.MouseEvent) => e.stopPropagation()}>
+                      <button className="px-3 py-2 text-xs font-mono bg-muted text-foreground rounded-lg border border-border hover:border-muted-foreground transition-all">
+                        Trade
+                      </button>
+                    </Link>
                     <button className="px-3 py-2 text-xs font-mono text-muted-foreground rounded-lg border border-border hover:border-muted-foreground transition-all">
                       Perks
                     </button>
