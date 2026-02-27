@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "bunx prisma generate && next build",
     "start": "next start",
     "lint": "eslint .",
-    "prisma:generate": "bun x prisma generate",
-    "prisma:migrate": "bun x prisma migrate dev",
-    "prisma:studio": "bun x prisma studio",
-    "prisma:format": "bun x prisma format"
+    "prisma:generate": "bunx prisma generate",
+    "prisma:migrate": "bunx prisma migrate dev",
+    "prisma:studio": "bunx prisma studio",
+    "prisma:format": "bunx prisma format"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.32.1",
