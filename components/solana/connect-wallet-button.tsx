@@ -1,27 +1,27 @@
-'use client'
+"use client"
 
-import { BaseWalletMultiButton } from '@solana/wallet-adapter-react-ui'
-import { cn } from '@/lib/utils'
+import { BaseWalletMultiButton } from "@solana/wallet-adapter-react-ui"
 
-const LABELS = {
+const CUSTOM_LABELS = {
   'change-wallet': 'Change wallet',
-  connecting: 'Connecting...',
+  connecting: 'Connecting ...',
   'copy-address': 'Copy address',
   copied: 'Copied',
   disconnect: 'Disconnect',
   'has-wallet': 'Connect',
   'no-wallet': 'Connect Wallet',
-} as const
+} as const;
 
-export function ConnectWalletButton({ className }: { className?: string }) {
-  return (
-    <BaseWalletMultiButton
-      labels={LABELS}
-      className={cn(
-        'wallet-adapter-button !px-6 !py-3 !text-sm !font-mono !bg-primary !text-primary-foreground !rounded-lg !border !border-primary hover:!opacity-90 !transition-opacity',
-        className,
-      )}
-    />
-  )
+interface CustomWalletButtonProps {
+  className?: string;
 }
 
+export function CustomWalletButton({ className }: CustomWalletButtonProps) {
+  return (
+    <div className={className || ''}>
+      <BaseWalletMultiButton
+        labels={CUSTOM_LABELS}
+      />
+    </div>
+  );
+} 

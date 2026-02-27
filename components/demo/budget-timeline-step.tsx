@@ -144,7 +144,7 @@ export function BudgetTimelineStep({ formData, onChange, onNext, onPrevious }: B
               </label>
               <Input
                 type="date"
-                value={formData.campaignEnd?.toISOString().split('T')[0] || ''}
+                value={formData.campaignEnd ? new Date(formData.campaignEnd).toISOString().split('T')[0] : ''}
                 onChange={(e) => handleDateChange('campaignEnd', e.target.value)}
                 className="font-mono"
               />
@@ -157,7 +157,7 @@ export function BudgetTimelineStep({ formData, onChange, onNext, onPrevious }: B
               </label>
               <Input
                 type="date"
-                value={formData.deliveryDate?.toISOString().split('T')[0] || ''}
+                value={formData.deliveryDate ? new Date(formData.deliveryDate).toISOString().split('T')[0] : ''}
                 onChange={(e) => handleDateChange('deliveryDate', e.target.value)}
                 className="font-mono"
               />

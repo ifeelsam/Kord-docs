@@ -7,11 +7,16 @@ interface BinaryMarketFormProps {
   setBetAmount: (amount: string) => void
   betType: 'yes' | 'no'
   setBetType: (type: 'yes' | 'no') => void
+  onTrade?: () => void
+  isTrading?: boolean
+  txHash?: string | null
+  yesPrice?: number
+  noPrice?: number
 }
 
-export function BinaryMarketForm({ betAmount, setBetAmount, betType, setBetType }: BinaryMarketFormProps) {
-  const yesPrice = 0.87
-  const noPrice = 0.13
+export function BinaryMarketForm({ betAmount, setBetAmount, betType, setBetType, onTrade, isTrading, txHash, yesPrice: yesPriceProp, noPrice: noPriceProp }: BinaryMarketFormProps) {
+  const yesPrice = yesPriceProp ?? 0.87
+  const noPrice = noPriceProp ?? 0.13
   const selectedPrice = betType === 'yes' ? yesPrice : noPrice
   const shares = (parseFloat(betAmount) / selectedPrice).toFixed(2)
   const slippage = 0.8
@@ -30,11 +35,10 @@ export function BinaryMarketForm({ betAmount, setBetAmount, betType, setBetType 
                 <button
                   key={amount}
                   onClick={() => setBetAmount(amount)}
-                  className={`px-4 py-2 text-sm font-mono rounded-lg border transition-colors ${
-                    betAmount === amount
+                  className={`px-4 py-2 text-sm font-mono rounded-lg border transition-colors ${betAmount === amount
                       ? 'bg-green-500 text-black border-green-500'
                       : 'border-border text-muted-foreground hover:border-green-500'
-                  }`}
+                    }`}
                 >
                   ${amount}
                 </button>
@@ -61,11 +65,10 @@ export function BinaryMarketForm({ betAmount, setBetAmount, betType, setBetType 
                 <button
                   key={value}
                   onClick={() => setBetType(value)}
-                  className={`flex-1 px-4 py-3 text-sm font-mono rounded-lg border transition-colors ${
-                    betType === value
+                  className={`flex-1 px-4 py-3 text-sm font-mono rounded-lg border transition-colors ${betType === value
                       ? `bg-${color}-500 text-black border-${color}-500`
                       : `border-border text-muted-foreground hover:border-${color}-500`
-                  }`}
+                    }`}
                 >
                   <span className={betType === value ? '' : color === 'green' ? 'text-green-500' : 'text-red-500'}>
                     ●
@@ -114,10 +117,24 @@ export function BinaryMarketForm({ betAmount, setBetAmount, betType, setBetType 
         </div>
 
         {/* Trade Button */}
-        <button className="w-full mt-6 px-6 py-3 text-sm font-mono bg-green-500 text-black rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 font-bold">
+        <button
+          onClick={onTrade}
+          disabled={isTrading}
+          className="w-full mt-6 px-6 py-3 text-sm font-mono bg-green-500 text-black rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2 font-bold disabled:opacity-50"
+        >
           <Zap className="w-4 h-4" />
-          Trade
+          {isTrading ? 'Confirming...' : 'Trade'}
         </button>
+        {txHash && (
+          <a
+            href={`https://explorer.solana.com/tx/${txHash}?cluster=devnet`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block mt-2 text-xs font-mono text-green-500 text-center underline"
+          >
+            ✅ View tx on Explorer →
+          </a>
+        )}
       </div>
     </div>
   )

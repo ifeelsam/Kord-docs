@@ -1,0 +1,1923 @@
+/**
+ * Program IDL in camelCase format in order to be used in JS/TS.
+ *
+ * Note that this is only a type helper and is not the actual IDL. The original
+ * IDL can be found at `target/idl/kord_program.json`.
+ */
+export type KordProgram = {
+  "address": "94tD81LyLHpaNZFVfoNT2g98Bi4FpZVEjVm8L2xj3KyH",
+  "metadata": {
+    "name": "kordProgram",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "claimArtistVesting",
+      "discriminator": [
+        84,
+        132,
+        251,
+        109,
+        206,
+        55,
+        92,
+        58
+      ],
+      "accounts": [
+        {
+          "name": "artist",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "project",
+            "artistVesting"
+          ]
+        },
+        {
+          "name": "project",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "artist"
+              },
+              {
+                "kind": "account",
+                "path": "project.project_id",
+                "account": "project"
+              }
+            ]
+          },
+          "relations": [
+            "artistVesting"
+          ]
+        },
+        {
+          "name": "artistVesting",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  101,
+                  115,
+                  116,
+                  105,
+                  110,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vestingTokenAccount",
+          "docs": [
+            "Source token account holding vested tokens (PDA-owned)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "artistTokenAccount",
+          "docs": [
+            "Artist's destination token account"
+          ],
+          "writable": true
+        },
+        {
+          "name": "tokenProgram",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "claimNoShares",
+      "discriminator": [
+        137,
+        75,
+        163,
+        205,
+        236,
+        184,
+        231,
+        184
+      ],
+      "accounts": [
+        {
+          "name": "claimer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "project",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project.artist",
+                "account": "project"
+              },
+              {
+                "kind": "account",
+                "path": "project.project_id",
+                "account": "project"
+              }
+            ]
+          },
+          "relations": [
+            "milestoneMarket"
+          ]
+        },
+        {
+          "name": "milestoneMarket",
+          "writable": true
+        },
+        {
+          "name": "milestoneVault",
+          "docs": [
+            "SOL vault PDA (holds locked milestone funds on FAIL)"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "shares",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "claimYesShares",
+      "discriminator": [
+        4,
+        67,
+        6,
+        201,
+        0,
+        146,
+        252,
+        148
+      ],
+      "accounts": [
+        {
+          "name": "claimer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "project",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project.artist",
+                "account": "project"
+              },
+              {
+                "kind": "account",
+                "path": "project.project_id",
+                "account": "project"
+              }
+            ]
+          },
+          "relations": [
+            "milestoneMarket"
+          ]
+        },
+        {
+          "name": "milestoneMarket",
+          "writable": true
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "shares",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "contribute",
+      "discriminator": [
+        82,
+        33,
+        68,
+        131,
+        32,
+        0,
+        205,
+        95
+      ],
+      "accounts": [
+        {
+          "name": "contributor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "project",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project.artist",
+                "account": "project"
+              },
+              {
+                "kind": "account",
+                "path": "project.project_id",
+                "account": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "milestoneVault",
+          "docs": [
+            "SOL vault PDA"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "publicSaleAccount",
+          "docs": [
+            "Public sale token account (source of tokens for contributors)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "contributorTokenAccount",
+          "docs": [
+            "Contributor's token account (destination)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "tokenProgram",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "createMilestoneMarket",
+      "discriminator": [
+        178,
+        48,
+        8,
+        25,
+        146,
+        23,
+        48,
+        216
+      ],
+      "accounts": [
+        {
+          "name": "artist",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "project"
+          ]
+        },
+        {
+          "name": "project",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "artist"
+              },
+              {
+                "kind": "account",
+                "path": "project.project_id",
+                "account": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "milestoneMarket",
+          "writable": true
+        },
+        {
+          "name": "milestoneVault",
+          "docs": [
+            "SOL vault PDA"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "milestoneId",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "createProject",
+      "discriminator": [
+        148,
+        219,
+        181,
+        42,
+        221,
+        114,
+        145,
+        190
+      ],
+      "accounts": [
+        {
+          "name": "artist",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "project",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "artist"
+              },
+              {
+                "kind": "arg",
+                "path": "projectId"
+              }
+            ]
+          }
+        },
+        {
+          "name": "tokenMint",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "milestoneVault",
+          "docs": [
+            "SOL vault for the project (PDA-owned)"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "anchorAccount",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  110,
+                  99,
+                  104,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "artistVesting",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  101,
+                  115,
+                  116,
+                  105,
+                  110,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "tokenProgram",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "projectId",
+          "type": "u64"
+        },
+        {
+          "name": "goal",
+          "type": "u64"
+        },
+        {
+          "name": "milestones",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "milestone"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "depositAudioRoyalties",
+      "discriminator": [
+        23,
+        54,
+        33,
+        121,
+        142,
+        111,
+        67,
+        206
+      ],
+      "accounts": [
+        {
+          "name": "depositor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "project",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project.artist",
+                "account": "project"
+              },
+              {
+                "kind": "account",
+                "path": "project.project_id",
+                "account": "project"
+              }
+            ]
+          },
+          "relations": [
+            "anchorAccount"
+          ]
+        },
+        {
+          "name": "anchorAccount",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  110,
+                  99,
+                  104,
+                  111,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "emergencyRefund",
+      "discriminator": [
+        188,
+        73,
+        52,
+        195,
+        137,
+        70,
+        180,
+        147
+      ],
+      "accounts": [
+        {
+          "name": "contributor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "project",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project.artist",
+                "account": "project"
+              },
+              {
+                "kind": "account",
+                "path": "project.project_id",
+                "account": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "milestoneVault",
+          "docs": [
+            "SOL vault PDA"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "contributorTokenAccount",
+          "docs": [
+            "Contributor's token account (tokens to burn)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "tokenMint",
+          "docs": [
+            "Token mint"
+          ],
+          "writable": true
+        },
+        {
+          "name": "tokenProgram",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initializeTokenAllocations",
+      "discriminator": [
+        140,
+        150,
+        191,
+        166,
+        147,
+        80,
+        121,
+        203
+      ],
+      "accounts": [
+        {
+          "name": "artist",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "project"
+          ]
+        },
+        {
+          "name": "project",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "artist"
+              },
+              {
+                "kind": "account",
+                "path": "project.project_id",
+                "account": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "tokenMint",
+          "writable": true,
+          "relations": [
+            "project"
+          ]
+        },
+        {
+          "name": "publicSaleAccount",
+          "docs": [
+            "Token account for public sale tokens"
+          ],
+          "writable": true
+        },
+        {
+          "name": "lpTokenAccount",
+          "docs": [
+            "Token account for LP allocation"
+          ],
+          "writable": true
+        },
+        {
+          "name": "anchorTokenAccount",
+          "docs": [
+            "Token account for anchor/royalty allocation"
+          ],
+          "writable": true
+        },
+        {
+          "name": "artistTokenAccount",
+          "docs": [
+            "Token account for artist vesting allocation"
+          ],
+          "writable": true
+        },
+        {
+          "name": "tokenProgram",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "resolveMilestone",
+      "discriminator": [
+        183,
+        234,
+        132,
+        97,
+        208,
+        35,
+        45,
+        117
+      ],
+      "accounts": [
+        {
+          "name": "resolver",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "project",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project.artist",
+                "account": "project"
+              },
+              {
+                "kind": "account",
+                "path": "project.project_id",
+                "account": "project"
+              }
+            ]
+          },
+          "relations": [
+            "milestoneMarket"
+          ]
+        },
+        {
+          "name": "milestoneMarket",
+          "writable": true
+        },
+        {
+          "name": "artistWallet",
+          "docs": [
+            "Artist wallet to receive funds on PASS"
+          ],
+          "writable": true
+        },
+        {
+          "name": "milestoneVault",
+          "docs": [
+            "SOL vault PDA"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project"
+              }
+            ]
+          }
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "submitMilestoneProof",
+      "discriminator": [
+        95,
+        246,
+        144,
+        35,
+        212,
+        197,
+        162,
+        197
+      ],
+      "accounts": [
+        {
+          "name": "artist",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "project"
+          ]
+        },
+        {
+          "name": "project",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "artist"
+              },
+              {
+                "kind": "account",
+                "path": "project.project_id",
+                "account": "project"
+              }
+            ]
+          },
+          "relations": [
+            "milestoneMarket"
+          ]
+        },
+        {
+          "name": "milestoneMarket",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "proofIpfs",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "tradeOutcome",
+      "discriminator": [
+        154,
+        46,
+        51,
+        71,
+        81,
+        218,
+        3,
+        136
+      ],
+      "accounts": [
+        {
+          "name": "trader",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "project",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  106,
+                  101,
+                  99,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "project.artist",
+                "account": "project"
+              },
+              {
+                "kind": "account",
+                "path": "project.project_id",
+                "account": "project"
+              }
+            ]
+          },
+          "relations": [
+            "milestoneMarket"
+          ]
+        },
+        {
+          "name": "milestoneMarket",
+          "writable": true
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "isYes",
+          "type": "bool"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "anchorAccount",
+      "discriminator": [
+        57,
+        77,
+        41,
+        145,
+        21,
+        109,
+        174,
+        247
+      ]
+    },
+    {
+      "name": "artistVesting",
+      "discriminator": [
+        163,
+        58,
+        219,
+        185,
+        65,
+        210,
+        106,
+        240
+      ]
+    },
+    {
+      "name": "milestoneMarket",
+      "discriminator": [
+        58,
+        220,
+        215,
+        137,
+        223,
+        29,
+        177,
+        223
+      ]
+    },
+    {
+      "name": "project",
+      "discriminator": [
+        205,
+        168,
+        189,
+        202,
+        181,
+        247,
+        142,
+        19
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "contributionMade",
+      "discriminator": [
+        81,
+        218,
+        72,
+        109,
+        93,
+        96,
+        131,
+        199
+      ]
+    },
+    {
+      "name": "milestoneMarketCreated",
+      "discriminator": [
+        104,
+        182,
+        66,
+        230,
+        154,
+        128,
+        3,
+        137
+      ]
+    },
+    {
+      "name": "milestoneResolved",
+      "discriminator": [
+        187,
+        22,
+        126,
+        26,
+        156,
+        84,
+        105,
+        7
+      ]
+    },
+    {
+      "name": "outcomeTraded",
+      "discriminator": [
+        155,
+        88,
+        142,
+        10,
+        82,
+        93,
+        83,
+        187
+      ]
+    },
+    {
+      "name": "projectCreated",
+      "discriminator": [
+        192,
+        10,
+        163,
+        29,
+        185,
+        31,
+        67,
+        168
+      ]
+    },
+    {
+      "name": "royaltiesDeposited",
+      "discriminator": [
+        155,
+        191,
+        240,
+        94,
+        244,
+        175,
+        56,
+        150
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "marketClosed",
+      "msg": "Market is closed for trading"
+    },
+    {
+      "code": 6001,
+      "name": "marketNotResolved",
+      "msg": "Market has not been resolved yet"
+    },
+    {
+      "code": 6002,
+      "name": "noProof",
+      "msg": "No proof submitted by artist"
+    },
+    {
+      "code": 6003,
+      "name": "twapNotReady",
+      "msg": "TWAP window not complete (24h required)"
+    },
+    {
+      "code": 6004,
+      "name": "fullyFunded",
+      "msg": "Project is already fully funded"
+    },
+    {
+      "code": 6005,
+      "name": "minContribution",
+      "msg": "Contribution below minimum amount"
+    },
+    {
+      "code": 6006,
+      "name": "invalidMilestone",
+      "msg": "Invalid milestone allocation (must sum to 10000 bps)"
+    },
+    {
+      "code": 6007,
+      "name": "unauthorized",
+      "msg": "Unauthorized: only the artist can perform this action"
+    },
+    {
+      "code": 6008,
+      "name": "projectNotFunded",
+      "msg": "Project is not in Funded status"
+    },
+    {
+      "code": 6009,
+      "name": "milestoneAlreadyResolved",
+      "msg": "Milestone has already been resolved"
+    },
+    {
+      "code": 6010,
+      "name": "insufficientShares",
+      "msg": "Insufficient shares to claim"
+    },
+    {
+      "code": 6011,
+      "name": "vestingNotStarted",
+      "msg": "Vesting has not started yet"
+    },
+    {
+      "code": 6012,
+      "name": "nothingToClaim",
+      "msg": "Nothing to claim: fully vested or zero available"
+    },
+    {
+      "code": 6013,
+      "name": "refundThresholdExceeded",
+      "msg": "Cannot refund: project has exceeded the 5% funding threshold"
+    },
+    {
+      "code": 6014,
+      "name": "invalidAllocation",
+      "msg": "Invalid allocation percentages (must sum to 100)"
+    },
+    {
+      "code": 6015,
+      "name": "overflow",
+      "msg": "Arithmetic overflow"
+    },
+    {
+      "code": 6016,
+      "name": "projectNotActive",
+      "msg": "Project is not active"
+    },
+    {
+      "code": 6017,
+      "name": "invalidMarketState",
+      "msg": "Market is not in the correct state for this operation"
+    },
+    {
+      "code": 6018,
+      "name": "milestonePassed",
+      "msg": "Milestone passed — no refund available"
+    },
+    {
+      "code": 6019,
+      "name": "milestoneFailed",
+      "msg": "Milestone failed — no YES payout available"
+    }
+  ],
+  "types": [
+    {
+      "name": "anchorAccount",
+      "docs": [
+        "Tracks royalty deposits and LP value for a project's anchor allocation"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "project",
+            "docs": [
+              "The project this anchor belongs to"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "totalDeposited",
+            "docs": [
+              "Total audio/royalty deposits (lamports)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "lpValue",
+            "docs": [
+              "Tracked LP value (lamports equivalent)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "artistVesting",
+      "docs": [
+        "Tracks artist vesting: 10% of total supply, 12-month linear unlock"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "project",
+            "docs": [
+              "The project this vesting belongs to"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "artist",
+            "docs": [
+              "Artist wallet"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "totalAllocation",
+            "docs": [
+              "Total token allocation (in token smallest units)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "claimed",
+            "docs": [
+              "Amount already claimed"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "startTs",
+            "docs": [
+              "Vesting start timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "duration",
+            "docs": [
+              "Vesting duration in seconds (12 months)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "contributionMade",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "contributor",
+            "type": "pubkey"
+          },
+          {
+            "name": "project",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "tokensReceived",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "marketStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "open"
+          },
+          {
+            "name": "proofSubmitted"
+          },
+          {
+            "name": "resolved"
+          }
+        ]
+      }
+    },
+    {
+      "name": "milestone",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "description",
+            "docs": [
+              "Description, e.g. \"Mixing Complete\""
+            ],
+            "type": "string"
+          },
+          {
+            "name": "allocationBps",
+            "docs": [
+              "Allocation in basis points (e.g. 3000 = 30%)"
+            ],
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "milestoneMarket",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "project",
+            "docs": [
+              "The project this market belongs to"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "milestoneId",
+            "docs": [
+              "Milestone index (0, 1, 2, ...)"
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "fundsLocked",
+            "docs": [
+              "Funds locked for this milestone (lamports)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "yesPool",
+            "docs": [
+              "YES pool liquidity (lamports)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "noPool",
+            "docs": [
+              "NO pool liquidity (lamports)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "twapWindow",
+            "docs": [
+              "TWAP window in seconds (86400 = 24h)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "twapStart",
+            "docs": [
+              "Timestamp when TWAP measurement starts (after proof submitted)"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "proofIpfs",
+            "docs": [
+              "IPFS hash of milestone proof"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "docs": [
+              "Current market status"
+            ],
+            "type": {
+              "defined": {
+                "name": "marketStatus"
+              }
+            }
+          },
+          {
+            "name": "totalYesShares",
+            "docs": [
+              "Total YES shares issued"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "totalNoShares",
+            "docs": [
+              "Total NO shares issued"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "milestoneMarketCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "project",
+            "type": "pubkey"
+          },
+          {
+            "name": "milestoneId",
+            "type": "u8"
+          },
+          {
+            "name": "fundsLocked",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "milestoneResolved",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "market",
+            "type": "pubkey"
+          },
+          {
+            "name": "passed",
+            "type": "bool"
+          },
+          {
+            "name": "payoutAmount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "outcomeTraded",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "trader",
+            "type": "pubkey"
+          },
+          {
+            "name": "market",
+            "type": "pubkey"
+          },
+          {
+            "name": "isYes",
+            "type": "bool"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "sharesReceived",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "project",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "artist",
+            "docs": [
+              "The artist who created this project"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "tokenMint",
+            "docs": [
+              "SPL token mint (1M fixed supply)"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "milestoneVault",
+            "docs": [
+              "Escrow vault for milestone funds (SOL)"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "lpAccount",
+            "docs": [
+              "LP token account reference"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "goal",
+            "docs": [
+              "Funding goal in lamports"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "raised",
+            "docs": [
+              "Amount raised so far in lamports"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "status",
+            "docs": [
+              "Current project status"
+            ],
+            "type": {
+              "defined": {
+                "name": "projectStatus"
+              }
+            }
+          },
+          {
+            "name": "milestones",
+            "docs": [
+              "List of milestones"
+            ],
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "milestone"
+                }
+              }
+            }
+          },
+          {
+            "name": "allocations",
+            "docs": [
+              "Token allocation breakdown"
+            ],
+            "type": {
+              "defined": {
+                "name": "tokenAllocations"
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump"
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "projectId",
+            "docs": [
+              "Project ID (unique per artist)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "createdAt",
+            "docs": [
+              "Timestamp of creation"
+            ],
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "projectCreated",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "artist",
+            "type": "pubkey"
+          },
+          {
+            "name": "projectId",
+            "type": "u64"
+          },
+          {
+            "name": "goal",
+            "type": "u64"
+          },
+          {
+            "name": "tokenMint",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "projectStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "active"
+          },
+          {
+            "name": "funded"
+          },
+          {
+            "name": "complete"
+          },
+          {
+            "name": "cancelled"
+          }
+        ]
+      }
+    },
+    {
+      "name": "royaltiesDeposited",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "project",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "lpValueAdded",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "tokenAllocations",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "publicPct",
+            "docs": [
+              "Public sale percentage"
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "lpPct",
+            "docs": [
+              "Initial LP percentage"
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "anchorPct",
+            "docs": [
+              "Anchor royalties percentage"
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "artistPct",
+            "docs": [
+              "Artist vesting percentage"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ],
+  "constants": [
+    {
+      "name": "anchorSeed",
+      "type": "bytes",
+      "value": "[97, 110, 99, 104, 111, 114]"
+    },
+    {
+      "name": "milestoneSeed",
+      "type": "bytes",
+      "value": "[109, 105, 108, 101, 115, 116, 111, 110, 101]"
+    },
+    {
+      "name": "projectSeed",
+      "type": "bytes",
+      "value": "[112, 114, 111, 106, 101, 99, 116]"
+    },
+    {
+      "name": "vaultSeed",
+      "type": "bytes",
+      "value": "[118, 97, 117, 108, 116]"
+    },
+    {
+      "name": "vestingSeed",
+      "type": "bytes",
+      "value": "[118, 101, 115, 116, 105, 110, 103]"
+    }
+  ]
+};

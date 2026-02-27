@@ -9,6 +9,9 @@ interface InvestmentFormProps {
   tokenPrice: number
   daysLeft: number
   lpDepth: number
+  onInvest?: () => void
+  isInvesting?: boolean
+  txHash?: string | null
 }
 
 export function InvestmentForm({
@@ -17,6 +20,9 @@ export function InvestmentForm({
   tokenPrice,
   daysLeft,
   lpDepth,
+  onInvest,
+  isInvesting,
+  txHash,
 }: InvestmentFormProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [slippage, setSlippage] = useState(0.5)
@@ -46,11 +52,10 @@ export function InvestmentForm({
                 <button
                   key={amount}
                   onClick={() => onAmountChange(amount)}
-                  className={`px-3 py-1 text-xs font-mono rounded transition-all ${
-                    investAmount === amount
+                  className={`px-3 py-1 text-xs font-mono rounded transition-all ${investAmount === amount
                       ? 'bg-accent text-background'
                       : 'bg-secondary text-muted-foreground hover:text-foreground'
-                  }`}
+                    }`}
                 >
                   ${amount}
                 </button>
@@ -99,9 +104,24 @@ export function InvestmentForm({
         </div>
 
         {/* CTA */}
-        <button className="w-full px-4 py-3 text-sm font-mono bg-accent text-background rounded-lg font-bold hover:opacity-90 transition-opacity mt-4">
-          Invest ${investAmount}
+        <button
+          onClick={onInvest}
+          disabled={isInvesting}
+          className="w-full px-4 py-3 text-sm font-mono bg-accent text-background rounded-lg font-bold hover:opacity-90 transition-opacity mt-4 disabled:opacity-50"
+        >
+          {isInvesting ? 'Confirming...' : `Invest ${investAmount} SOL`}
         </button>
+
+        {txHash && (
+          <a
+            href={`https://explorer.solana.com/tx/${txHash}?cluster=devnet`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-xs font-mono text-accent text-center underline"
+          >
+            ✅ View tx on Explorer →
+          </a>
+        )}
 
         {/* Pro Tip */}
         <p className="text-xs font-mono text-muted-foreground text-center">

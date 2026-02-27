@@ -8,11 +8,14 @@ skip-lint = false
 [programs.localnet]
 kord_program = "94tD81LyLHpaNZFVfoNT2g98Bi4FpZVEjVm8L2xj3KyH"
 
+[programs.devnet]
+kord_program = "94tD81LyLHpaNZFVfoNT2g98Bi4FpZVEjVm8L2xj3KyH"
+
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]

@@ -1,8 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import { LAMPORTS_PER_SOL } from '@solana/web3.js'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { useCreateProject } from '@/hooks/use-create-project'
+import { useKordProgram } from '@/lib/kord-program'
 
 interface ReviewLaunchStepProps {
   formData: any
@@ -11,7 +14,9 @@ interface ReviewLaunchStepProps {
 }
 
 export function ReviewLaunchStep({ formData, onLaunch, onPrevious }: ReviewLaunchStepProps) {
-  const [isLaunching, setIsLaunching] = useState(false)
+  const { createProject, isLoading: isLaunching, error: launchError } = useCreateProject()
+  const { connected } = useKordProgram()
+  const [txHash, setTxHash] = useState<string | null>(null)
 
   const total = Object.values(formData.budgetBreakdown).reduce((sum: number, val: any) => sum + Number(val), 0)
   const tokenomicsData = {
@@ -26,11 +31,27 @@ export function ReviewLaunchStep({ formData, onLaunch, onPrevious }: ReviewLaunc
   }
 
   const handleLaunch = async () => {
-    setIsLaunching(true)
-    // Simulate transaction
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    setIsLaunching(false)
-    onLaunch()
+    // Convert USD goal to lamports (approximate: $1 ≈ 0.005 SOL placeholder)
+    const goalLamports = Math.round(formData.fundingGoal * 0.005 * LAMPORTS_PER_SOL)
+    const projectId = Date.now() // Use timestamp as unique project ID
+
+    const milestones = [
+      { description: 'Demo Recording', allocationBps: 3000 },
+      { description: 'Mixing Complete', allocationBps: 3000 },
+      { description: 'Mastering Done', allocationBps: 2000 },
+      { description: 'Distribution', allocationBps: 2000 },
+    ]
+
+    const result = await createProject({
+      projectId,
+      goal: goalLamports,
+      milestones,
+    })
+
+    if (result) {
+      setTxHash(result.txSignature)
+      onLaunch()
+    }
   }
 
   const formatCurrency = (num: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num)
@@ -132,6 +153,26 @@ export function ReviewLaunchStep({ formData, onLaunch, onPrevious }: ReviewLaunc
         </div>
       </Card>
 
+      {/* Tx Status */}
+      {launchError && (
+        <div className="bg-destructive/10 border border-destructive/30 rounded-lg p-4">
+          <p className="text-sm font-mono text-destructive">❌ {launchError}</p>
+        </div>
+      )}
+      {txHash && (
+        <div className="bg-accent/10 border border-accent/30 rounded-lg p-4">
+          <p className="text-sm font-mono text-accent">✅ Project created on-chain!</p>
+          <a
+            href={`https://explorer.solana.com/tx/${txHash}?cluster=devnet`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-mono text-accent underline"
+          >
+            View on Solana Explorer →
+          </a>
+        </div>
+      )}
+
       {/* Warnings */}
       <div className="bg-destructive/10 border border-destructive/30 rounded-lg p-4 space-y-2">
         <p className="text-sm font-mono">
@@ -152,12 +193,11 @@ export function ReviewLaunchStep({ formData, onLaunch, onPrevious }: ReviewLaunc
         </Button>
         <Button
           onClick={handleLaunch}
-          disabled={isLaunching}
+          disabled={isLaunching || !connected}
           className="font-mono"
           size="lg"
         >
-          {isLaunching ? 'Launching...' : 'Launch Project'}
-          {!isLaunching && ' →'}
+          {!connected ? 'Connect Wallet First' : isLaunching ? 'Deploying On-Chain...' : 'Launch Project →'}
         </Button>
       </div>
     </div>
