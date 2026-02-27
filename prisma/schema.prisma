@@ -1,0 +1,343 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  INVESTOR
+  ARTIST
+  BOTH
+}
+
+enum ProjectStatus {
+  DRAFT
+  LIVE
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum WalletTransactionType {
+  DEPOSIT
+  WITHDRAW
+  INVEST
+  CLAIM
+  TRANSFER
+}
+
+enum WalletTransactionStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+enum ProposalStatus {
+  DRAFT
+  ACTIVE
+  PASSED
+  FAILED
+  CANCELLED
+}
+
+enum MarketSide {
+  YES
+  NO
+}
+
+enum Chain {
+  SOLANA
+  ETHEREUM
+  OTHER
+}
+
+model User {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  handle      String   @unique
+  displayName String
+  email       String?  @unique
+  role        UserRole @default(INVESTOR)
+
+  walletAddress String? @unique
+  chain         Chain?  @default(SOLANA)
+
+  artistProjects  Project[]           @relation("ArtistProjects")
+  investments     Investment[]
+  wallets         Wallet[]
+  liquidity       LiquidityPosition[]
+  marketPositions MarketPosition[]
+
+  @@index([role])
+}
+
+model Project {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title    String
+  slug     String @unique
+  artistId String
+  artist   User   @relation("ArtistProjects", fields: [artistId], references: [id])
+
+  genre       String?
+  imageUrl    String?
+  description String?
+
+  fundingGoal    Decimal @db.Decimal(18, 2)
+  fundingCurrent Decimal @default(0) @db.Decimal(18, 2)
+  tokenSymbol    String
+  tokenPrice     Decimal @db.Decimal(18, 6)
+
+  startDate DateTime?
+  endDate   DateTime?
+  status    ProjectStatus @default(DRAFT)
+
+  totalInvestors Int     @default(0)
+  totalVolume24h Decimal @default(0) @db.Decimal(18, 2)
+
+  perks              Perk[]
+  investments        Investment[]
+  proposals          Proposal[]
+  token              Token?
+  liquidityPool      LiquidityPool?
+  walletTransactions WalletTransaction[]
+
+  @@index([status])
+  @@index([artistId])
+}
+
+model Perk {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
+
+  title       String
+  description String?
+  minAmount   Decimal? @db.Decimal(18, 2)
+
+  @@index([projectId])
+}
+
+model Investment {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  investorId String
+  projectId  String
+
+  investor User    @relation(fields: [investorId], references: [id])
+  project  Project @relation(fields: [projectId], references: [id])
+
+  amountUsd   Decimal @db.Decimal(18, 2)
+  tokenAmount Decimal @db.Decimal(28, 8)
+  price       Decimal @db.Decimal(18, 6)
+
+  txHash String?
+  chain  Chain?  @default(SOLANA)
+
+  @@index([investorId])
+  @@index([projectId])
+}
+
+model Wallet {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  chain   Chain  @default(SOLANA)
+  address String @unique
+
+  balances     WalletBalance[]
+  transactions WalletTransaction[]
+
+  @@index([userId])
+}
+
+model WalletBalance {
+  id       String @id @default(cuid())
+  walletId String
+  wallet   Wallet @relation(fields: [walletId], references: [id])
+
+  assetSymbol String
+  amount      Decimal  @db.Decimal(28, 8)
+  amountUsd   Decimal? @db.Decimal(18, 2)
+
+  @@unique([walletId, assetSymbol])
+  @@index([walletId])
+}
+
+model WalletTransaction {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  walletId String
+  wallet   Wallet @relation(fields: [walletId], references: [id])
+
+  type   WalletTransactionType
+  status WalletTransactionStatus @default(SUCCESS)
+
+  assetSymbol String
+  amount      Decimal  @db.Decimal(28, 8)
+  amountUsd   Decimal? @db.Decimal(18, 2)
+
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id])
+
+  txHash String?
+
+  @@index([walletId, createdAt])
+  @@index([projectId])
+}
+
+model Proposal {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id])
+
+  index       Int
+  title       String
+  summary     String?
+  description String?
+
+  fundsAtRisk  Decimal        @db.Decimal(18, 2)
+  fundsPercent Float
+  deadline     DateTime
+  status       ProposalStatus @default(ACTIVE)
+
+  market Market?
+
+  @@unique([projectId, index])
+  @@index([projectId])
+}
+
+model Market {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  proposalId String   @unique
+  proposal   Proposal @relation(fields: [proposalId], references: [id])
+
+  yesPrice  Decimal @db.Decimal(18, 6)
+  noPrice   Decimal @db.Decimal(18, 6)
+  poolDepth Decimal @db.Decimal(18, 2)
+  volume24h Decimal @db.Decimal(18, 2)
+
+  twapYes Decimal? @db.Decimal(18, 6)
+  twapNo  Decimal? @db.Decimal(18, 6)
+
+  resolvedAt   DateTime?
+  resolvedSide MarketSide?
+
+  positions   MarketPosition[]
+  pricePoints MarketPricePoint[]
+
+  @@index([proposalId])
+}
+
+model MarketPosition {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  marketId String
+  userId   String
+
+  market Market @relation(fields: [marketId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+
+  side     MarketSide
+  shares   Decimal    @db.Decimal(28, 8)
+  avgPrice Decimal    @db.Decimal(18, 6)
+  valueUsd Decimal    @db.Decimal(18, 2)
+
+  @@index([marketId])
+  @@index([userId])
+}
+
+model MarketPricePoint {
+  id       String @id @default(cuid())
+  marketId String
+  market   Market @relation(fields: [marketId], references: [id])
+
+  timestamp DateTime
+  yesPrice  Decimal  @db.Decimal(18, 6)
+  noPrice   Decimal  @db.Decimal(18, 6)
+
+  @@index([marketId, timestamp])
+}
+
+model LiquidityPool {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projectId String  @unique
+  project   Project @relation(fields: [projectId], references: [id])
+
+  baseSymbol  String
+  quoteSymbol String
+
+  reserveBase  Decimal @db.Decimal(28, 8)
+  reserveQuote Decimal @db.Decimal(28, 8)
+
+  fees24h   Decimal @db.Decimal(18, 2)
+  volume24h Decimal @db.Decimal(18, 2)
+  tvlUsd    Decimal @db.Decimal(18, 2)
+
+  liquidityPositions LiquidityPosition[]
+
+  @@index([projectId])
+}
+
+model LiquidityPosition {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  poolId String
+  userId String
+
+  pool LiquidityPool @relation(fields: [poolId], references: [id])
+  user User          @relation(fields: [userId], references: [id])
+
+  amountBase         Decimal @db.Decimal(28, 8)
+  amountQuote        Decimal @db.Decimal(28, 8)
+  valueUsd           Decimal @db.Decimal(18, 2)
+  shareOfPool        Float
+  feesEarned         Decimal @default(0) @db.Decimal(18, 2)
+  impermanentLossUsd Decimal @default(0) @db.Decimal(18, 2)
+
+  @@index([poolId])
+  @@index([userId])
+}
+
+model Token {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projectId String  @unique
+  project   Project @relation(fields: [projectId], references: [id])
+
+  symbol      String
+  name        String
+  supplyTotal Decimal @db.Decimal(28, 8)
+
+  marketCapUsd Decimal @db.Decimal(18, 2)
+  lpDepthUsd   Decimal @db.Decimal(18, 2)
+}
