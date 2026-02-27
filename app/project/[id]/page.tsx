@@ -7,6 +7,10 @@ import { ProjectDetailHero } from '@/components/demo/project-detail-hero'
 import { ProjectDetailTabs } from '@/components/demo/project-detail-tabs'
 import { InvestmentForm } from '@/components/demo/investment-form'
 import { RisksAndLegals } from '@/components/demo/risks-and-legals'
+import { useContribute } from '@/hooks/use-contribute'
+import { PublicKey } from '@solana/web3.js'
+import { toast } from 'sonner'
+import BN from 'bn.js'
 
 // Mock project data - will be replaced with real data from API
 const mockProject = {
@@ -27,6 +31,7 @@ const mockProject = {
     change24h: 12,
     volume24h: 18700,
     lpDepth: 23000,
+    mint: 'So11111111111111111111111111111111111111112', // using SOL as placeholder
   },
   timeline: {
     campaignStart: new Date('2026-02-12'),
@@ -76,8 +81,27 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
   const [investAmount, setInvestAmount] = useState(100)
   const [activeTab, setActiveTab] = useState('overview')
 
+  const { contribute, isLoading, txSignature } = useContribute()
+
   const fundingPercentage = Math.round((mockProject.funding.current / mockProject.funding.goal) * 100)
   const daysLeft = Math.ceil((mockProject.timeline.campaignEnd.getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+
+  const handleInvest = async () => {
+    try {
+      // using static mock data to call the smart contract
+      const artistKey = new PublicKey('11111111111111111111111111111111') // Mock artist
+      const projectId = 1
+      const amountLamports = investAmount * 1e9 // Convert SOL to lamports
+      const tokenMint = new PublicKey(mockProject.token.mint)
+
+      const tx = await contribute(artistKey, projectId, amountLamports, tokenMint)
+      if (tx) {
+        toast.success('Investment successful!')
+      }
+    } catch (err) {
+      toast.error('Investment failed. Check wallet connection.')
+    }
+  }
 
   return (
     <main className="min-h-screen bg-background">
@@ -168,6 +192,9 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   tokenPrice={mockProject.token.price}
                   daysLeft={daysLeft}
                   lpDepth={mockProject.token.lpDepth}
+                  onInvest={handleInvest}
+                  isInvesting={isLoading}
+                  txHash={txSignature}
                 />
               </div>
             </div>
