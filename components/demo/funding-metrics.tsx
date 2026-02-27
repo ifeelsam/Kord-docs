@@ -63,21 +63,21 @@ export function FundingMetrics() {
           <AreaChart data={detailedFundingData}>
             <defs>
               <linearGradient id="colorFunding" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="hsl(var(--accent))" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="hsl(var(--accent))" stopOpacity={0} />
+                <stop offset="5%" stopColor="#22c55e" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#22c55e" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-            <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="hsl(var(--muted-foreground))" />
-            <YAxis tick={{ fontSize: 12 }} stroke="hsl(var(--muted-foreground))" />
-            <Tooltip 
-              contentStyle={{ 
+            <XAxis dataKey="date" tick={{ fontSize: 12, fill: '#ffffff' }} stroke="#ffffff" />
+            <YAxis tick={{ fontSize: 12, fill: '#ffffff' }} stroke="#ffffff" />
+            <Tooltip
+              contentStyle={{
                 backgroundColor: 'hsl(var(--card))',
                 border: '1px solid hsl(var(--border))',
               }}
               formatter={(value) => `$${value.toLocaleString()}`}
             />
-            <Area type="monotone" dataKey="amount" stroke="hsl(var(--accent))" fill="url(#colorFunding)" />
+            <Area type="monotone" dataKey="amount" stroke="#22c55e" fill="url(#colorFunding)" />
           </AreaChart>
         </ResponsiveContainer>
       </div>
