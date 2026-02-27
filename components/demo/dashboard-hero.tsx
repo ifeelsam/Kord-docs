@@ -9,7 +9,7 @@ export function DashboardHero() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <h1 className="text-4xl md:text-5xl font-[family-name:var(--font-geist-pixel-square)] text-foreground mb-2">
-              Welcome Back, @janedoe
+              Welcome Back, @sam
             </h1>
             <h2 className="text-lg md:text-xl font-mono text-muted-foreground mb-4">
               Your Kord Dashboard

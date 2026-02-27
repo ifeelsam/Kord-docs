@@ -6,7 +6,7 @@ const activityData = [
   { id: 1, time: '2m ago', user: '@musicfan23', action: 'swapped 0.5 SOL → 5,618 ECHOES' },
   { id: 2, time: '5m ago', user: '@trancehead', action: 'swapped 1,200 ECHOES → 0.107 SOL' },
   { id: 3, time: '12m ago', user: '@bigwhale', action: 'added $2.3K liquidity' },
-  { id: 4, time: '23m ago', user: '@janedoe', action: 'Anchor deposited 456 AUDIO' },
+  { id: 4, time: '23m ago', user: '@sam', action: 'Anchor deposited 456 AUDIO' },
   { id: 5, time: '34m ago', user: '@musicfan12', action: 'swapped 2.1 SOL → 23,567 ECHOES' },
   { id: 6, time: '45m ago', user: '@trader.bot', action: 'swapped 0.75 SOL → 8,427 ECHOES' },
 ]
@@ -25,11 +25,10 @@ export function RecentActivity() {
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={`px-3 py-1 text-xs font-mono rounded border transition-colors ${
-                filter === f
+              className={`px-3 py-1 text-xs font-mono rounded border transition-colors ${filter === f
                   ? 'bg-green-500 text-black border-green-500'
                   : 'border-border hover:border-green-500'
-              }`}
+                }`}
             >
               {f.charAt(0).toUpperCase() + f.slice(1)}
             </button>

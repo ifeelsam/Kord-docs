@@ -5,7 +5,7 @@ const projects = [
     id: 1,
     title: "Echoes",
     artist: "Jane Doe",
-    handle: "@janedoe",
+    handle: "@sam",
     genre: "Electronic",
     raised: 47200,
     goal: 50000,

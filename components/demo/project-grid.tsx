@@ -18,7 +18,7 @@ const MOCK_PROJECTS = [
     id: '1',
     title: 'Echoes',
     artist: 'Jane Doe',
-    artistHandle: '@janedoe',
+    artistHandle: '@sam',
     genre: 'Electronic',
     image: 'ipfs://QmExample1',
     fundingCurrent: 47200,

@@ -25,7 +25,7 @@ export function TradingHero({ selectedTimeframe, setSelectedTimeframe }: Trading
           <h1 className="text-4xl md:text-5xl font-[family-name:var(--font-geist-pixel-square)] mb-2">
             Trade ECHOES
           </h1>
-          <p className="text-muted-foreground font-mono text-sm">Echoes Album Token (@janedoe)</p>
+          <p className="text-muted-foreground font-mono text-sm">Echoes Album Token (@sam)</p>
         </div>
 
         {/* Stats Grid */}
@@ -58,11 +58,10 @@ export function TradingHero({ selectedTimeframe, setSelectedTimeframe }: Trading
                 <button
                   key={tf}
                   onClick={() => setSelectedTimeframe(tf)}
-                  className={`px-3 py-1 text-xs font-mono rounded border transition-colors ${
-                    selectedTimeframe === tf
+                  className={`px-3 py-1 text-xs font-mono rounded border transition-colors ${selectedTimeframe === tf
                       ? 'bg-green-500 text-black border-green-500'
                       : 'border-border hover:border-green-500'
-                  }`}
+                    }`}
                 >
                   {tf}
                 </button>

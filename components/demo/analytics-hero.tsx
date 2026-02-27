@@ -45,7 +45,7 @@ export function AnalyticsHero({ projectId }: AnalyticsHeroProps) {
             <h1 className="text-4xl md:text-5xl font-[family-name:var(--font-geist-pixel-square)] mb-2 text-white">
               Echoes Analytics
             </h1>
-            <p className="text-white/80 font-mono text-sm shadow-sm">Electronic Album by @janedoe</p>
+            <p className="text-white/80 font-mono text-sm shadow-sm">Electronic Album by @sam</p>
           </div>
         </div>
 

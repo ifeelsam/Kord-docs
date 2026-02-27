@@ -19,7 +19,7 @@ export function PortfolioView() {
     {
       id: '1',
       project: 'Echoes',
-      artist: '@janedoe',
+      artist: '@sam',
       value: '$1,247',
       tokens: '14K',
       price: '$0.089',

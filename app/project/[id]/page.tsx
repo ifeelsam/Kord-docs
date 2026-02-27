@@ -17,10 +17,10 @@ const mockProject = {
   id: 'echoes-janedoe',
   title: 'Echoes',
   artist: 'Jane Doe',
-  artistHandle: '@janedoe',
+  artistHandle: '@sam',
   genre: 'Electronic',
   description: 'High-energy electronic album blending trance and future bass. Features 10 original tracks + 2 remixes. Targeting festival summer 2026 release.',
-  image: 'https://via.placeholder.com/600x600?text=Echoes',
+  image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200&h=600&fit=crop',
   funding: {
     current: 47200,
     goal: 50000,
