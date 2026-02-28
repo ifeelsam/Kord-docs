@@ -31,12 +31,17 @@ export function KordHero() {
       </div>
 
       <div className="flex flex-wrap justify-center gap-4 mt-8">
-        <CustomWalletButton/>
+        <CustomWalletButton />
         <Link href="/explore">
           <button className="px-6 py-3 text-sm font-mono bg-secondary text-secondary-foreground rounded-lg border border-border hover:border-muted-foreground transition-all">
             Explore Projects
           </button>
         </Link>
+        <a href="https://sam-17.gitbook.io/kord-docs/" target="_blank" rel="noopener noreferrer">
+          <button className="px-6 py-3 text-sm font-mono bg-secondary text-secondary-foreground rounded-lg border border-border hover:border-muted-foreground transition-all">
+            Docs
+          </button>
+        </a>
       </div>
     </section>
   )
