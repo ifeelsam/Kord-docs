@@ -14,12 +14,7 @@ interface FilterBarProps {
 }
 
 const GENRES = ['All Genres', 'Electronic', 'Hip-Hop', 'Rock', 'Pop', 'Jazz', 'Indie']
-const STATUSES = [
-  { label: 'Live', count: 1247 },
-  { label: 'Upcoming', count: 89 },
-  { label: 'Successful', count: 2847 },
-  { label: 'Failed', count: 23 },
-]
+const STATUSES = ['Live', 'Upcoming', 'Successful', 'Failed']
 const SORT_OPTIONS = [
   { value: 'trending', label: 'Trending' },
   { value: 'recently-funded', label: 'Recently Funded' },
@@ -55,12 +50,11 @@ export function FilterBar({ filters, onFiltersChange }: FilterBarProps) {
                 <button
                   key={genre}
                   onClick={() => handleGenreChange(genre)}
-                  className={`px-3 py-1 text-xs font-mono rounded border transition-all ${
-                    (genre === 'All Genres' && filters.genre === 'all') ||
-                    (genre.toLowerCase() === filters.genre)
+                  className={`px-3 py-1 text-xs font-mono rounded border transition-all ${(genre === 'All Genres' && filters.genre === 'all') ||
+                      (genre.toLowerCase() === filters.genre)
                       ? 'bg-accent text-accent-foreground border-accent'
                       : 'border-border bg-secondary text-muted-foreground hover:border-muted-foreground'
-                  }`}
+                    }`}
                 >
                   {genre}
                 </button>
@@ -72,17 +66,16 @@ export function FilterBar({ filters, onFiltersChange }: FilterBarProps) {
           <div className="flex flex-wrap gap-2 items-center">
             <span className="text-xs font-mono text-muted-foreground uppercase">Status:</span>
             <div className="flex flex-wrap gap-2">
-              {STATUSES.map(({ label, count }) => (
+              {STATUSES.map((status) => (
                 <button
-                  key={label}
-                  onClick={() => handleStatusChange(label)}
-                  className={`px-3 py-1 text-xs font-mono rounded border transition-all ${
-                    label.toLowerCase() === filters.status
+                  key={status}
+                  onClick={() => handleStatusChange(status)}
+                  className={`px-3 py-1 text-xs font-mono rounded border transition-all ${status.toLowerCase() === filters.status
                       ? 'bg-accent text-accent-foreground border-accent'
                       : 'border-border bg-secondary text-muted-foreground hover:border-muted-foreground'
-                  }`}
+                    }`}
                 >
-                  {label} <span className="text-accent">({count})</span>
+                  {status}
                 </button>
               ))}
             </div>
@@ -96,11 +89,10 @@ export function FilterBar({ filters, onFiltersChange }: FilterBarProps) {
                 <button
                   key={value}
                   onClick={() => handleSortChange(value)}
-                  className={`px-3 py-1 text-xs font-mono rounded border transition-all ${
-                    value === filters.sort
+                  className={`px-3 py-1 text-xs font-mono rounded border transition-all ${value === filters.sort
                       ? 'bg-accent text-accent-foreground border-accent'
                       : 'border-border bg-secondary text-muted-foreground hover:border-muted-foreground'
-                  }`}
+                    }`}
                 >
                   {label}
                 </button>
