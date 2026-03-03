@@ -23,12 +23,9 @@ export function KordHero() {
       </h2>
 
       <p className="text-muted-foreground text-lg md:text-xl max-w-2xl leading-relaxed">
-        Artist Jane Doe needs $47K to finish &apos;Echoes&apos;. Invest now → Get AUDIO royalties + early access.
+        Artist Jane Doe needs funds to finish their &apos;project&apos;. Invest now → Get AUDIO royalties + early access.
       </p>
 
-      <div className="mt-4 flex items-center justify-center gap-4 text-sm font-mono text-accent">
-        <span>LIVE: 23 Projects Raising $1.2M</span>
-      </div>
 
       <div className="flex flex-wrap justify-center gap-4 mt-8">
         <CustomWalletButton />
