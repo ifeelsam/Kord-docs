@@ -38,16 +38,6 @@ export function KordFooter() {
                   Dashboard
                 </Link>
               </li>
-              <li>
-                <a href="#" className="hover:text-accent transition-colors">
-                  Developer Docs
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-accent transition-colors">
-                  Security
-                </a>
-              </li>
             </ul>
           </div>
 
@@ -58,47 +48,17 @@ export function KordFooter() {
             </h4>
             <ul className="space-y-2 text-xs font-mono text-muted-foreground">
               <li>
-                <a href="#" className="hover:text-accent transition-colors">
+                <a href="https://sam-17.gitbook.io/kord-docs/" className="hover:text-accent transition-colors">
                   About
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-accent transition-colors">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-accent transition-colors">
+                <a href="mailto:sanskarsharma9005@gmail.com" className="hover:text-accent transition-colors">
                   Contact
                 </a>
               </li>
             </ul>
           </div>
-
-          {/* Social */}
-          <div>
-            <h4 className="font-mono font-bold text-sm mb-3 uppercase tracking-widest">
-              Social
-            </h4>
-            <ul className="space-y-2 text-xs font-mono text-muted-foreground">
-              <li>
-                <a href="#" className="hover:text-accent transition-colors">
-                  Discord
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-accent transition-colors">
-                  Twitter (@kord_fi)
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-accent transition-colors">
-                  Telegram
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
 
         <div className="border-t border-border pt-8 text-center text-xs font-mono text-muted-foreground">
           <p>© 2026 Kord. Built on Solana + Audius.</p>
