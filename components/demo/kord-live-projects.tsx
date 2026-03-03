@@ -74,9 +74,6 @@ export function KordLiveProjects() {
           <h2 className="text-3xl md:text-4xl font-[family-name:var(--font-geist-pixel-square)] font-bold mb-2 tracking-tight">
             Live Projects
           </h2>
-          <p className="text-muted-foreground font-mono text-sm">
-            $1.47M Raised Today
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
