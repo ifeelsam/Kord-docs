@@ -26,13 +26,13 @@ export default function Page() {
         <hr className="border-border" />
       </div>
 
-      <KordFAQ />
+      <KordFinalCTA />
 
       <div className="max-w-5xl mx-auto px-4">
         <hr className="border-border" />
       </div>
 
-      <KordFinalCTA />
+      <KordFAQ />
 
       <KordFooter />
     </main>
