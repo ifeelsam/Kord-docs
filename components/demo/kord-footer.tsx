@@ -59,7 +59,7 @@ export function KordFooter() {
               </li>
             </ul>
           </div>
-
+        </div>
         <div className="border-t border-border pt-8 text-center text-xs font-mono text-muted-foreground">
           <p>© 2026 Kord. Built on Solana + Audius.</p>
         </div>
