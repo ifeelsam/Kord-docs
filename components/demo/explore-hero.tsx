@@ -25,11 +25,11 @@ export function ExploreHero({ onSearch }: ExploreHeroProps) {
       </div>
 
       <h1 className="text-5xl md:text-6xl lg:text-7xl tracking-tight text-balance font-[family-name:var(--font-geist-pixel-square)]">
-        <span className="text-accent">1,247</span> Live Projects
+        <span className="text-accent">  </span> Live Projects
       </h1>
 
-      <h2 className="text-xl md:text-2xl text-muted-foreground font-mono">
-        Raising <span className="text-accent">$4.2M</span> for Independent Music
+      <h2 className="text-xl md:text-2xl text-accent font-mono">
+        Raising funds for Independent Music
       </h2>
 
       <div className="w-full max-w-2xl mt-8">
