@@ -45,7 +45,7 @@ export function ExploreHero({ onSearch }: ExploreHeroProps) {
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-xs md:text-sm font-mono text-muted-foreground">
+      {/* <div className="flex flex-wrap justify-center gap-4 md:gap-8 text-xs md:text-sm font-mono text-muted-foreground">
         <div className="flex flex-col">
           <span className="text-accent font-semibold">1,247</span>
           <span>Total Projects</span>
@@ -58,7 +58,7 @@ export function ExploreHero({ onSearch }: ExploreHeroProps) {
           <span className="text-accent font-semibold">98.2%</span>
           <span>Success Rate</span>
         </div>
-      </div>
+      </div> */}
     </section>
   )
 }
